@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Ceereals/ArgoAPI-NodeJS/issues"
   },
-  "homepage": "https://github.com/Ceereals/ArgoAPI-NodeJS#readme"
+  "homepage": "https://github.com/Ceereals/ArgoAPI-NodeJS#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "jsdom-no-contextify": "^3.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
 }
