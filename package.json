@@ -1,0 +1,19 @@
+{
+  "name": "argoapi_nodejs",
+  "version": "1.0.0",
+  "description": "argo api in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ceereals/ArgoAPI-NodeJS.git"
+  },
+  "author": "Ceereals",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ceereals/ArgoAPI-NodeJS/issues"
+  },
+  "homepage": "https://github.com/Ceereals/ArgoAPI-NodeJS#readme"
+}
