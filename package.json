@@ -1,10 +1,14 @@
 {
   "name": "argoapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nodejs module made for comunicate with Argo API",
   "main": "argoapi.js",
   "keywords": [
-    "argo","scuolanext","didup","argo api","scuolanext api"
+    "argo",
+    "scuolanext",
+    "didup",
+    "argo api",
+    "scuolanext api"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
