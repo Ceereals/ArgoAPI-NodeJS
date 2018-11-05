@@ -1,6 +1,6 @@
 # ArgoAPI-NodeJS #
 
-> A simple npm module that allows you to communicate with Argo's API
+> A simple npm module that allows you to communicate with ScuolaNext Argo's API
 
 [![npm version badge](https://img.shields.io/npm/v/sinopia.svg)](https://www.npmjs.com/package/argoapi)
 
