@@ -25,6 +25,8 @@ ArgoAPI.login('school code','username','password')
 ```
 ### With async/await method
 ```javascript
+const ArgoAPI = require('argoapi')
+
 //inside an async function
 try {
     await ArgoAPI.login('school code','username','password')
