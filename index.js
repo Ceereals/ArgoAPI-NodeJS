@@ -20,7 +20,7 @@ class ArgoAPI {
      * @param {string} username Username del portale
      * @param {string} password Password
      * @param {number} loginwithtoken Toggle per usare token o password, se inserito e uguale a 1 usa il token
-     * @returns {Promise} Promessa che viene risolta in caso di successo, i dati saranno alla proprietà 'scheda' della classe ArgoAPI
+     * @returns {Promise<string>} Promessa che viene risolta in caso di successo, i dati saranno alla proprietà 'scheda' della classe ArgoAPI
      */
     async login(cod_min, username, password, loginwithtoken = 0) {
         return new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ class ArgoAPI {
                         this.curl("schede", header)
                             .then(data => {
                                 this.scheda = { ...data[0] }
-                                resolve();
+                                resolve('Success!');
                             })
                             .catch(err => {
                                 console.log('Unable to get student info')
@@ -56,7 +56,7 @@ class ArgoAPI {
      * @param {string} request Tipo di richiesta
      * @param {Object | Array} auxiliaryHeader Header che si vuole passare
      * @param {Object | Array} auxiliaryQuery Query che si vuole passare
-     * @returns {Promise} Promessa che restituisce il risultato della richiesta
+     * @returns {Promise<{}>} Promessa che restituisce il risultato della richiesta
      */
     _curl = async function(request, auxiliaryHeader, auxiliaryQuery = {}) {
         return new Promise((resolve, reject) => {
