@@ -2,7 +2,7 @@
 
 > A simple npm module that allows you to communicate with Argo's API
 
-[![NPM Version][npm-image]][npm-url](https://www.npmjs.com/package/argoapi)
+[![npm version badge](https://img.shields.io/npm/v/sinopia.svg)](https://www.npmjs.com/package/argoapi)
 
 ## Install
 
