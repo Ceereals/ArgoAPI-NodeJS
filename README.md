@@ -36,7 +36,8 @@ try {
     console.log(e)
 }
 ```
-
+## Documentation
+    For [docs](DOCS.md) see the DOCS.md file.
 ## License
 
 [MIT](http://vjpr.mit-license.org)
