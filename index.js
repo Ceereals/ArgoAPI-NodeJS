@@ -79,6 +79,7 @@ class ArgoAPI {
     /**
      * Metodo utilizzato per prendere la scheda "Accade oggi" in base alla data selezionata
      * @param {String} datGiorno Formato 'AAAA-MM-GG'
+     * @returns {*} scheda del giorno sotto forma di oggetto
      */
     async oggiScuola(datGiorno) {
         let header = { "x-auth-token": this.scheda.authToken, "x-cod-min": this.scheda.codMin, "x-prg-alunno": this.scheda.prgAlunno, "x-prg-scheda": this.scheda.prgScheda, "x-prg-scuola": this.scheda.prgScuola };
