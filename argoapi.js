@@ -7,7 +7,7 @@ $.ajaxSettings.xhr = function () {
 const ARGOAPI_URL = "https://www.portaleargo.it/famiglia/api/rest/"
 const ARGOAPI_KEY = "ax6542sdru3217t4eesd9"
 const ARGOAPI_VERSION = "2.0.2"
-module.exports = class ArgoAPI {
+class ArgoAPI {
     /**
      * Istanza l'oggetto
      */
@@ -18,7 +18,7 @@ module.exports = class ArgoAPI {
      * Metodo per effettuare il login
      * @param {string} cod_min Codice della scuola
      * @param {string} username Username del portale
-     * @param {string} password Password
+     * @param {string} password Password o Token
      * @param {number} loginwithtoken Toggle per usare token o password, se inserito e uguale a 1 usa il token
      * @returns {Promise<string>} Promessa che viene risolta in caso di successo, i dati saranno alla proprietà 'scheda' della classe ArgoAPI
      */
@@ -30,7 +30,7 @@ module.exports = class ArgoAPI {
                 let header = { 'x-cod-min': cod_min, 'x-user-id': username, 'x-pwd': password };
                 this._curl("login", header)
                     .then(data => {
-                        let token = data.token
+                        this.token = data.token
                         header = { "x-auth-token": token, "x-cod-min": cod_min }
                         this._curl("schede", header)
                             .then(data => {
@@ -47,7 +47,18 @@ module.exports = class ArgoAPI {
                         
                     })
 
-            } else if (loginwithtoken == 1) { }
+            } else if (loginwithtoken == 1) { 
+                let header = {"x-auth-token": password, "x-cod-min": cod_min};
+			    this._curl("schede", header)
+                            .then(data => {
+                                this.scheda = { ...data[0] }
+                                resolve('Success!');
+                            })
+                            .catch(err => {
+                                reject('Unable to get student info')
+                                
+                            })
+            }
         })
     }
     /**
@@ -203,3 +214,4 @@ module.exports = class ArgoAPI {
 }
 
 
+module.exports = new ArgoAPI();
