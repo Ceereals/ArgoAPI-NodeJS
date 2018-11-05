@@ -31,7 +31,7 @@ class ArgoAPI {
                 this._curl("login", header)
                     .then(data => {
                         this.token = data.token
-                        header = { "x-auth-token": token, "x-cod-min": cod_min }
+                        header = { "x-auth-token": this.token, "x-cod-min": cod_min }
                         this._curl("schede", header)
                             .then(data => {
                                 this.scheda = { ...data[0] }
