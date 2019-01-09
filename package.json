@@ -1,6 +1,6 @@
 {
   "name": "argoapi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A nodejs module made for comunicate with Argo API",
   "main": "argoapi.js",
   "keywords": [
