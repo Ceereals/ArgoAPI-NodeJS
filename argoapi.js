@@ -23,43 +23,30 @@ class ArgoAPI {
      * @returns {Promise<string>} Promessa che viene risolta in caso di successo, i dati saranno alla proprietà 'scheda' della classe ArgoAPI
      */
     async login(cod_min, username, password, loginwithtoken = 0) {
-        return new Promise((resolve, reject) => {
             if (loginwithtoken == 0) {
                 this.cod_min = cod_min
                 this.username = username
                 let header = { 'x-cod-min': cod_min, 'x-user-id': username, 'x-pwd': password };
-                this._curl("login", header)
-                    .then(data => {
-                        this.token = data.token
-                        header = { "x-auth-token": this.token, "x-cod-min": cod_min }
-                        this._curl("schede", header)
-                            .then(data => {
-                                this.scheda = { ...data[0] }
-                                resolve('Success!');
-                            })
-                            .catch(err => {
-                                reject('Unable to get student info')
-                                
-                            })
-                    })
-                    .catch(err => {
-                        reject('Unable to login')
-                        
-                    })
+                let dataFirst = await this._curl("login", header)
+                if(dataFirst){
+                    this.token = dataFirst.token
+                    header = { "x-auth-token": this.token, "x-cod-min": cod_min }
+                    let data = await this._curl("schede", header)
+                    if (data){
+                        this.scheda = { ...data[0] }
+                        return Promise.resolve('Success!');
+                    } else return Promise.reject('Unable to get student info')    
+                } else return Promise.reject('Unable to login')
 
             } else if (loginwithtoken == 1) { 
                 let header = {"x-auth-token": password, "x-cod-min": cod_min};
-			    this._curl("schede", header)
-                            .then(data => {
-                                this.scheda = { ...data[0] }
-                                resolve('Success!');
-                            })
-                            .catch(err => {
-                                reject('Unable to get student info')
+                let data = await this._curl("schede", header)
+                if (data){          
+                    this.scheda = { ...data[0] }
+                    return Promise.resolve('Success!');
+                } else return Promise.reject('Unable to get student info')
                                 
-                            })
             }
-        })
     }
     /**
      * Metodo utilizzato per effettuarele richieste http al server rest d Argo
@@ -104,7 +91,7 @@ class ArgoAPI {
      * @returns {boolean} Indica se si è loggati o meno
      */
     async isLogged() {
-        if (this.scheda != undefined) {
+        if (this.scheda != null) {
             let header = { "x-auth-token": this.scheda.authToken, "x-cod-min": this.scheda.codMin, "x-prg-alunno": this.scheda.prgAlunno, "x-prg-scheda": this.scheda.prgScheda, "x-prg-scuola": this.scheda.prgScuola };
             try {
                 await this._curl("compiti", header);
