@@ -56,11 +56,10 @@ class ArgoAPI {
      * @returns {Promise<{}>} Promessa che restituisce il risultato della richiesta
      */
     async _curl(request, auxiliaryHeader, auxiliaryQuery = {}) {
-        return new Promise((resolve, reject) => {
             let defaultHeader = { "x-key-app": ARGOAPI_KEY, "x-version": ARGOAPI_VERSION, "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36" };
             let header = { ...defaultHeader, ...auxiliaryHeader };
             let query = { '_dc': Date.now(), ...auxiliaryQuery }
-            $.ajax({
+            return $.ajax({
                 url: ARGOAPI_URL + request + '?' + $.param(query),
                 beforeSend: function (xhr) {
                     let head = Object.entries(header)
@@ -68,10 +67,9 @@ class ArgoAPI {
                         xhr.setRequestHeader(head[i][0], head[i][1])
                     }
                 },
-                success: (data) => resolve(data),
-                error: () => reject()
+                success: (data) =>  Promise.resolve(data),
+                error: () => Promise.reject()
             })
-        })
     }
     /**
      * Metodo utilizzato per prendere la scheda "Accade oggi" in base alla data selezionata
